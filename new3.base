@@ -1,0 +1,574 @@
+DECLARE SUB inst ()
+
+GOTO 1.1
+2
+'letter
+'1234
+'||||
+ LINE (40, 40)-(80, 40), c'1
+ LINE (40, 80)-(80, 80), c
+ LINE (40, 40)-(40, 80), c
+ LINE (80, 40)-(80, 50), c
+ LINE (80, 80)-(80, 70), c
+ LINE (80, 70)-(52, 70), c
+ LINE (80, 50)-(52, 50), c
+ LINE (52, 50)-(52, 53), c
+ LINE (52, 70)-(52, 65), c
+ LINE (52, 53)-(80, 53), c
+ LINE (52, 65)-(80, 65), c
+ LINE (80, 65)-(80, 53), c
+  LINE (85, 40)-(85, 80), c '2
+  LINE (85, 80)-(125, 80), c
+  LINE (85, 40)-(125, 40), c
+  LINE (125, 40)-(125, 52), c
+  LINE (125, 80)-(125, 68), c
+  LINE (125, 68)-(97, 68), c
+  LINE (125, 52)-(97, 52), c
+  LINE (97, 68)-(97, 52), c
+   LINE (130, 40)-(142, 40), c '3
+   LINE (158, 40)-(170, 40), c
+   LINE (130, 80)-(142, 80), c
+   LINE (158, 80)-(170, 80), c
+   LINE (130, 40)-(130, 80), c
+   LINE (170, 40)-(170, 80), c
+   LINE (142, 40)-(142, 52), c
+   LINE (142, 80)-(142, 68), c
+   LINE (158, 40)-(158, 52), c
+   LINE (158, 80)-(158, 68), c
+   LINE (158, 52)-(142, 52), c
+   LINE (158, 68)-(142, 68), c
+    LINE (175, 80)-(215, 80), c '4
+    LINE (175, 40)-(215, 40), c
+    LINE (175, 40)-(175, 80), c
+    LINE (215, 40)-(215, 80), c
+    LINE (187, 52)-(187, 68), c
+    LINE (203, 52)-(203, 68), c
+    LINE (203, 52)-(187, 52), c
+    LINE (203, 68)-(187, 68), c'last
+   
+' arrow
+CONST PI = 3.141593
+CIRCLE (215, 88), 50, c, PI + j, PI / 2
+ CIRCLE (215, 88), 37, c, PI + j, PI / 2
+CIRCLE (215, 88), 33, c, PI + j, PI / 2
+CIRCLE (215, 88), 18, c, PI + j, PI / 2
+LINE (178, 117)-(215, 90), c
+LINE (178, 117)-(215, 144), c
+LINE (215, 89)-(215, 103), c
+LINE (215, 145)-(215, 130), c
+LINE (215, 119)-(215, 115), c
+
+RETURN
+
+1.1 CLS
+SCREEN 13
+PAINT (50, 40), 9, 4
+g = 1
+j = 1.6
+i = 1
+c = 17
+DO
+FOR a = 1 TO 100
+NEXT a
+IF i = 1 THEN c = c + 1
+IF c = 31 THEN i = 0
+IF i = 0 THEN c = c - 1
+IF c <= 16 THEN i = 1
+'LOCATE 1, 1
+'PRINT c;
+IF c = 256 THEN c = 0
+g$ = INKEY$
+IF g$ = "o" OR g$ = "p" THEN g$ = ""
+a$ = INKEY$
+IF a$ = "o" THEN c = c - 1
+IF a$ = "p" THEN c = c + 1
+IF c < 1 THEN c = 1
+GOSUB 2
+LOOP UNTIL g$ <> ""
+CLS
+i = 0
+DO
+IF i = 0 THEN cy = cy + 1
+IF i = 1 THEN cy = cy - 1
+IF cy = 255 THEN i = 1
+IF cy = 16 THEN i = 0
+
+LOCATE 12, 25
+COLOR cy
+PRINT "      Do you want instructions?"
+FOR ghj = 1 TO 20
+a$ = INKEY$
+IF a$ = "y" OR a$ = "Y" THEN inst: GOTO .1
+IF a$ = "N" OR a$ = "n" THEN GOTO .1
+NEXT ghj
+LOOP
+.1: : : : : :
+OPEN "hiscore.dat" FOR INPUT AS #1
+INPUT #1, highscore
+oldhigh = highscore
+CLOSE #1
+.5: : : : : : : : :
+CLS
+RANDOMIZE TIMER
+vehicles = 5
+score = 0
+fuel = 200
+air = 900
+set = 1
+1 n = 40
+m = 10
+a = 70
+b = 70
+SCREEN 13
+h1 = 40
+h2 = 0
+h3 = 0
+ob1 = INT(RND * 3 + 1)
+ob2 = INT(RND * 3 + 1)
+ob3 = INT(RND * 3 + 1)
+IF ob1 = 1 THEN g1 = 80
+IF ob2 = 1 THEN g2 = 80
+IF ob3 = 1 THEN g3 = 80
+IF ob1 = 2 THEN g1 = 100
+IF ob2 = 2 THEN g2 = 100
+IF ob3 = 2 THEN g3 = 100
+IF ob1 = 3 THEN g1 = 146
+IF ob2 = 3 THEN g2 = 146
+IF ob3 = 3 THEN g3 = 146
+j1 = 2
+j2 = 2
+j3 = 2
+y1 = -40
+y2 = 0
+y3 = -20
+'sm:
+'GOSUB 16
+'GOTO sm:
+ch = 17
+DO
+COLOR ch
+'LOCATE 1, 1
+'PRINT ci
+LOCATE 3, 6
+PRINT ci
+if a$ = chr$(
+
+IF a$ = "R" THEN gh = 1
+IF gh = 1 AND a$ = "e" THEN gh = 2
+IF gh = 2 AND a$ = "S" THEN gh = 3
+IF gh = 3 AND a$ = "e" THEN gh = 4
+IF gh = 4 AND a$ = "t" THEN gh = 5
+IF gh = 5 AND a$ = "S" THEN gh = 6
+IF gh = 6 THEN OPEN "hiscore.dat" FOR OUTPUT AS #1: WRITE #1, 0, highscore: CLOSE #1: g = 0: highscore = 0
+IF a$ = CHR$(27) THEN GOSUB 17.1
+h = h - 1
+y1 = y1 + 1
+IF y1 = j1 THEN GOSUB 15: h1 = h1 + 2: y1 = 0: GOSUB 16
+IF h1 >= 319 THEN GOSUB 15: h1 = 0
+y2 = y2 + 1
+IF y2 = j2 THEN GOSUB 17: h2 = h2 + 2: y2 = 0: GOSUB 18
+IF h2 >= 319 THEN GOSUB 17: h2 = 0
+y3 = y3 + 1
+IF y3 = j3 THEN GOSUB 19: h3 = h3 + 2: y3 = 0: GOSUB 20
+IF h3 >= 319 THEN GOSUB 19: h3 = 0
+IF b = g1 AND a = h1 + 8 THEN score = score + 320 - h1: GOSUB 21
+IF b = g2 AND a = h2 + 8 THEN score = score + 320 - h2: GOSUB 22
+IF b = g3 AND a = h3 + 8 THEN score = score + (320 - h2) * 5: GOSUB 23
+IF score > highscore THEN highscore = score
+IF set = 1 THEN GOSUB 10
+a$ = INKEY$
+LOCATE 1, 1
+PRINT "Score:"; score
+LOCATE 1, 20
+PRINT "High Score:"; highscore
+LOCATE 2, 1
+PRINT "Vehicles:"; vehicles
+'LOCATE 2, 20
+'PRINT "Air:"; air
+
+'LOCATE 1, 1
+'PRINT a$; ci; "a:"; a; "b:"; b; "h1:"; h1; "g1:"; g1; "y:"; y
+'LOCATE 2, 1
+'PRINT "y1:"; y1; "y2:"; y2; "y3:"; y3
+'LOCATE 3, 1
+'PRINT "h1:"; h1; "h2:"; h2; "h3:"; h3; "g1:"; g1; "g2:"; g2; "g3:"; g3
+'IF a$ = "p" THEN ci = ci + 1
+'IF a$ = "o" THEN ci = ci - 1
+'IF ci = 0 THEN ci = 1
+'IF ci > 256 THEN ci = 256
+'PSET (n, m), ci
+IF a$ = CHR$(0) + "M" OR a$ = "6" THEN c = 0: GOSUB 5: GOSUB 5.1: GOSUB 5.2: GOSUB 5.3: GOSUB 6: GOSUB 7: a = a + 2
+IF a$ = CHR$(0) + "P" OR a$ = "2" THEN c = 0: GOSUB 5: GOSUB 5.1: GOSUB 5.2: GOSUB 5.3: GOSUB 6: GOSUB 7: b = b + 2
+IF a$ = CHR$(0) + "H" OR a$ = "8" THEN c = 0: GOSUB 5: GOSUB 5.1: GOSUB 5.2: GOSUB 5.3: GOSUB 6: GOSUB 7: b = b - 2
+IF a$ = CHR$(0) + "K" OR a$ = "4" THEN c = 0: GOSUB 5: GOSUB 5.1: GOSUB 5.2: GOSUB 5.3: GOSUB 6: GOSUB 7: a = a - 2
+IF b >= 150 THEN GOSUB crash
+IF b < 66 THEN GOSUB crash
+c = 44
+GOSUB 5
+c = 21
+GOSUB 5.1
+c = 4
+GOSUB 5.2
+c = 43
+GOSUB 5.3
+c = 24
+GOSUB 6
+c = 18
+GOSUB 7
+LOOP
+
+
+
+
+c = 44
+5 PSET (a, b), c
+PSET (a, b - 1), c
+PSET (a, b - 2), c
+PSET (a, b - 3), c
+PSET (a, b - 4), c
+PSET (a, b - 5), c
+PSET (a, b - 6), c
+PSET (a + 1, b - 4), c
+PSET (a + 1, b - 3), c
+LINE (a + 4, b - 11)-(a + 23, b - 11), c
+LINE (a + 4, b - 9)-(a + 23, b - 9), c
+LINE (a + 5, b - 10)-(a + 19, b - 10), c
+LINE (a + 23, b - 12)-(a + 23, b - 14), c
+LINE (a + 22, b - 14)-(a + 10, b - 14), c
+LINE (a + 22, b - 13)-(a + 11, b - 13), c
+LINE (a + 22, b - 12)-(a + 11, b - 12), c
+PSET (a + 9, b - 13), c
+PSET (a + 8, b - 12), c
+'pset
+
+RETURN
+5.1
+LINE (a + 6, b - 8)-(a + 20, b - 8), c
+RETURN
+5.2
+LINE (a + 23, b - 10)-(a + 20, b - 10), c
+RETURN
+5.3
+PSET (a + 4, b - 10), c
+RETURN
+c = 24
+6 PSET (a + 2, b - 2), c
+PSET (a + 2, b - 3), c
+PSET (a + 2, b - 4), c
+PSET (a + 2, b - 5), c
+PSET (a + 3, b - 1), c
+PSET (a + 4, b), c
+PSET (a + 3, b - 6), c
+PSET (a + 4, b - 7), c
+PSET (a + 5, b - 7), c
+PSET (a + 6, b - 7), c
+PSET (a + 7, b - 7), c
+PSET (a + 8, b - 7), c
+PSET (a + 9, b - 7), c
+PSET (a + 10, b - 7), c
+PSET (a + 11, b - 7), c
+PSET (a + 12, b - 7), c
+PSET (a + 13, b - 7), c
+PSET (a + 14, b - 7), c
+PSET (a + 15, b - 7), c
+PSET (a + 16, b - 7), c
+PSET (a + 17, b - 7), c
+PSET (a + 18, b - 7), c
+PSET (a + 19, b - 7), c
+PSET (a + 20, b - 7), c
+PSET (a + 21, b - 7), c
+PSET (a + 22, b - 7), c
+PSET (a + 23, b - 6), c
+PSET (a + 24, b - 5), c
+PSET (a + 24, b - 4), c
+PSET (a + 24, b - 3), c
+PSET (a + 24, b - 2), c
+PSET (a + 23, b - 1), c
+PSET (a + 22, b), c
+PSET (a + 5, b), c
+PSET (a + 6, b), c
+PSET (a + 7, b), c
+PSET (a + 8, b), c
+PSET (a + 9, b), c
+PSET (a + 10, b), c
+PSET (a + 11, b), c
+PSET (a + 12, b), c
+PSET (a + 13, b), c
+PSET (a + 14, b), c
+PSET (a + 15, b), c
+PSET (a + 16, b), c
+PSET (a + 17, b), c
+PSET (a + 18, b), c
+PSET (a + 19, b), c
+PSET (a + 20, b), c
+PSET (a + 21, b), c
+RETURN
+
+c = 18
+7 PSET (a + 3, b - 2), c
+PSET (a + 3, b - 3), c
+PSET (a + 3, b - 4), c
+PSET (a + 3, b - 5), c
+PSET (a + 4, b - 2), c
+PSET (a + 4, b - 1), c
+PSET (a + 5, b - 1), c
+PSET (a + 6, b - 1), c
+PSET (a + 7, b - 1), c
+PSET (a + 7, b - 2), c
+PSET (a + 8, b - 2), c
+PSET (a + 8, b - 3), c
+PSET (a + 8, b - 4), c
+PSET (a + 8, b - 5), c
+PSET (a + 7, b - 5), c
+PSET (a + 7, b - 6), c
+PSET (a + 6, b - 6), c
+PSET (a + 5, b - 6), c
+PSET (a + 4, b - 6), c
+PSET (a + 4, b - 5), c
+PSET (a + 10, b - 6), c
+PSET (a + 13, b - 6), c
+PSET (a + 16, b - 6), c
+PSET (a + 19, b - 6), c
+PSET (a + 20, b - 6), c
+PSET (a + 21, b - 6), c
+PSET (a + 22, b - 6), c
+PSET (a + 23, b - 5), c
+PSET (a + 22, b - 5), c
+PSET (a + 23, b - 4), c
+PSET (a + 23, b - 3), c
+PSET (a + 23, b - 2), c
+PSET (a + 22, b - 2), c
+PSET (a + 22, b - 1), c
+PSET (a + 21, b - 1), c
+PSET (a + 20, b - 1), c
+PSET (a + 19, b - 1), c
+PSET (a + 19, b - 2), c
+PSET (a + 18, b - 2), c
+PSET (a + 18, b - 3), c
+PSET (a + 18, b - 4), c
+PSET (a + 18, b - 5), c
+PSET (a + 19, b - 5), c
+PSET (a + 16, b - 1), c
+PSET (a + 13, b - 1), c
+PSET (a + 10, b - 1), c
+RETURN
+
+10
+LINE (320, 50)-(1, 50), ch
+LINE (320, 150)-(1, 150), ch
+RETURN
+crash:
+vehicles = vehicles - 1: b = 100
+IF vehicles = 0 THEN LOCATE 12, 20: PRINT "You died because you ran out of vehicles": GOTO 17.1
+IF air = 0 THEN LOCATE 12, 20: PRINT "You died because you ran out of air": GOTO 17.1
+IF fuel = 0 THEN LOCATE 12, 20: PRINT "You died because you ran out of fuel": GOTO 17.1
+RETURN
+17.1
+LOCATE 14, 20
+PRINT "Do you want to quit? Y/N"
+DO
+a$ = INKEY$
+IF a$ = "Y" OR a$ = "y" THEN GOTO 17.2
+IF a$ = "N" OR a$ = "n" THEN LOCATE 14, 20: PRINT "                        ": RETURN
+LOOP
+17.2
+IF oldhigh < score THEN OPEN "hiscore.dat" FOR OUTPUT AS #1: WRITE #1, score: CLOSE #1
+SYSTEM
+15
+CIRCLE (h1, g1 - 5), 6, 0
+PSET (h1 + 2, g1 - 3), 0
+PSET (h1 + 1, g1 - 3), 0
+PSET (h1, g1 - 3), 0
+PSET (h1 - 1, g1 - 3), 0
+PSET (h1 - 2, g1 - 3), 0
+PSET (h1 + 2, g1 - 4), 0
+PSET (h1 + 2, g1 - 5), 0
+PSET (h1 + 1, g1 - 5), 0
+PSET (h1, g1 - 5), 0
+PSET (h1 - 1, g1 - 5), 0
+PSET (h1 - 2, g1 - 5), 0
+PSET (h1 - 2, g1 - 6), 0
+PSET (h1 - 2, g1 - 7), 0
+PSET (h1 - 1, g1 - 7), 0
+PSET (h1, g1 - 7), 0
+PSET (h1 + 1, g1 - 7), 0
+PSET (h1 + 2, g1 - 7), 0
+RETURN
+16 CIRCLE (h1, g1 - 5), 6, 14
+PSET (h1 + 2, g1 - 3), 46
+PSET (h1 + 1, g1 - 3), 46
+PSET (h1, g1 - 3), 46
+PSET (h1 - 1, g1 - 3), 46
+PSET (h1 - 2, g1 - 3), 46
+PSET (h1 + 2, g1 - 4), 46
+PSET (h1 + 2, g1 - 5), 46
+PSET (h1 + 1, g1 - 5), 46
+PSET (h1, g1 - 5), 46
+PSET (h1 - 1, g1 - 5), 46
+PSET (h1 - 2, g1 - 5), 46
+PSET (h1 - 2, g1 - 6), 46
+PSET (h1 - 2, g1 - 7), 46
+PSET (h1 - 1, g1 - 7), 46
+PSET (h1, g1 - 7), 46
+PSET (h1 + 1, g1 - 7), 46
+PSET (h1 + 2, g1 - 7), 46
+PSET (h1, g1 - 8), 46
+'PSET (h1 + 1, g1 - 8), 46
+PSET (h1, g1 - 7), 46
+PSET (h1, g1 - 6), 46
+PSET (h1, g1 - 4), 46
+PSET (h1, g1 - 2), 46
+
+
+RETURN
+17
+CIRCLE (h2, g2 - 5), 6, 0
+PSET (h2 + 2, g2 - 3), 0
+PSET (h2 + 1, g2 - 3), 0
+PSET (h2, g2 - 3), 0
+PSET (h2 - 1, g2 - 3), 0
+PSET (h2 - 2, g2 - 3), 0
+PSET (h2 + 2, g2 - 4), 0
+PSET (h2 + 2, g2 - 5), 0
+PSET (h2 + 1, g2 - 5), 0
+PSET (h2, g1 - 5), 0
+PSET (h2 - 1, g2 - 5), 0
+PSET (h2 - 2, g2 - 5), 0
+PSET (h2 - 2, g2 - 6), 0
+PSET (h2 - 2, g2 - 7), 0
+PSET (h2 - 1, g2 - 7), 0
+PSET (h2, g2 - 7), 0
+PSET (h2 + 1, g2 - 7), 0
+PSET (h2 + 2, g2 - 6), 0
+PSET (h2, g2 - 8), 0
+'PSET (h2 + 1, g2 - 8), 0
+PSET (h2, g2 - 7), 0
+PSET (h2, g2 - 6), 0
+PSET (h2, g2 - 4), 0
+PSET (h2, g2 - 2), 0
+
+RETURN
+18
+CIRCLE (h2, g2 - 5), 6, 14
+PSET (h2 + 2, g2 - 3), 46
+PSET (h2 + 1, g2 - 3), 46
+PSET (h2, g2 - 3), 46
+PSET (h2 - 1, g2 - 3), 46
+PSET (h2 - 2, g2 - 3), 46
+PSET (h2 + 2, g2 - 4), 46
+PSET (h2 + 2, g2 - 5), 46
+PSET (h2 + 1, g2 - 5), 46
+PSET (h2, g2 - 5), 46
+PSET (h2 - 1, g2 - 5), 46
+PSET (h2 - 2, g2 - 5), 46
+PSET (h2 - 2, g2 - 6), 46
+PSET (h2 - 2, g2 - 7), 46
+PSET (h2 - 1, g2 - 7), 46
+PSET (h2, g2 - 7), 46
+PSET (h2 + 1, g2 - 7), 46
+PSET (h2, g2 - 7), 46
+PSET (h2, g2 - 8), 46
+PSET (h2, g2 - 7), 46
+PSET (h2, g2 - 6), 46
+PSET (h2, g2 - 4), 46
+PSET (h2, g2 - 2), 46
+
+
+RETURN
+19
+CIRCLE (h3, g3 - 5), 6, 0
+PSET (h3 + 2, g2 - 3), 0
+PSET (h3 + 1, g2 - 3), 0
+PSET (h3, g2 - 3), 0
+PSET (h3 - 1, g3 - 3), 0
+PSET (h3 - 2, g3 - 3), 0
+PSET (h3 + 2, g3 - 4), 0
+PSET (h3 + 2, g3 - 5), 0
+PSET (h3 + 1, g3 - 5), 0
+PSET (h3, g3 - 5), 0
+PSET (h3 - 1, g3 - 5), 0
+PSET (h3 - 2, g3 - 5), 0
+PSET (h3 - 2, g3 - 6), 0
+PSET (h3 - 2, g3 - 7), 0
+PSET (h3 - 1, g3 - 7), 0
+PSET (h3, g3 - 7), 0
+PSET (h3 + 1, g3 - 7), 0
+PSET (h3, g3 - 7), 0
+PSET (h3, g3 - 8), 0
+PSET (h3, g3 - 8), 0
+'PSET (h3 + 1, g3 - 8), 0
+PSET (h3, g3 - 7), 0
+PSET (h3, g3 - 6), 0
+PSET (h3, g3 - 4), 0
+PSET (h3, g3 - 2), 0
+RETURN
+20
+CIRCLE (h3, g3 - 5), 6, 14
+PSET (h3 + 2, g3 - 3), 46
+PSET (h3 + 1, g3 - 3), 46
+PSET (h3, g3 - 3), 46
+PSET (h3 - 1, g3 - 3), 46
+PSET (h3 - 2, g3 - 3), 46
+PSET (h3 + 2, g3 - 4), 46
+PSET (h3 + 2, g3 - 5), 46
+PSET (h3 + 1, g3 - 5), 46
+PSET (h3, g3 - 5), 46
+PSET (h3 - 1, g3 - 5), 46
+PSET (h3 - 2, g3 - 5), 46
+PSET (h3 - 2, g3 - 6), 46
+PSET (h3 - 2, g3 - 7), 46
+PSET (h3 - 1, g3 - 7), 46
+PSET (h3, g3 - 7), 46
+PSET (h3 + 1, g3 - 7), 46
+PSET (h3, g3 - 7), 46
+PSET (h3, g3 - 8), 46
+PSET (h3, g3 - 8), 46
+'PSET (h3 + 1, g3 - 8), 46
+PSET (h3, g3 - 7), 46
+PSET (h3, g3 - 6), 46
+PSET (h3, g3 - 4), 46
+PSET (h3, g3 - 2), 46
+
+RETURN
+21
+GOSUB 15
+h1 = 0
+ob1 = INT(RND * 3 + 1)
+IF ob1 = 1 THEN g1 = 80
+IF ob1 = 2 THEN g1 = 100
+IF ob1 = 3 THEN g1 = 146
+RETURN
+22
+GOSUB 17
+h2 = 0
+ob2 = INT(RND * 3 + 1)
+IF ob2 = 1 THEN g2 = 80
+IF ob2 = 2 THEN g2 = 100
+IF ob2 = 3 THEN g2 = 146
+
+RETURN
+23
+GOSUB 19
+h3 = 0
+ob3 = INT(RND * 3 + 1)
+IF ob3 = 1 THEN g3 = 80
+IF ob3 = 2 THEN g3 = 100
+IF ob3 = 3 THEN g3 = 146
+RETURN
+
+SUB inst
+CLS
+PRINT "You are to steer your way through a gold field picking up gold and";
+PRINT " other items"
+PRINT
+PRINT "Your keys are:"
+PRINT
+PRINT "         8"
+PRINT "         up "
+PRINT " 4 left      right 6"
+PRINT "        down"
+PRINT "         2"
+DO
+LOOP UNTIL INKEY$ <> ""
+END SUB
+
